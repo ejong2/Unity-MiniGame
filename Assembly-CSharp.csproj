@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Scripts\ItemBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
