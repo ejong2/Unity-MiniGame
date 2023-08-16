@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameManager gameManager; // 게임 매니저
+
     // 플레이어의 이동 속도
     public float speed = 10f;
 
@@ -20,6 +22,8 @@ public class Player : MonoBehaviour
     // 매 프레임마다 호출되는 함수 -> 유저 입력을 받아서 처리
     void Update()
     {
+        if (gameManager.isGameover) return; // 게임 오버 상태라면 업데이트를 진행하지 않음
+
         // GetAxis() : 키보드 입력을 받아서 -1 ~ 1 사이의 값을 반환
         float inpuitX = Input.GetAxis("Horizontal"); // 조이스틱 대응 가능
         float inputZ = Input.GetAxis("Vertical"); 
