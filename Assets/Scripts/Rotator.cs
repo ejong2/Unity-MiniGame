@@ -7,7 +7,6 @@ public class Rotator : MonoBehaviour
     void Start()
     {
     }
-
     void Update()
     {
         // 1초에 60도 회전
