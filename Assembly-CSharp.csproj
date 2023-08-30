@@ -99,6 +99,7 @@
     <Compile Include="Assets\Sokovan\Scripts\Rotator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Sokovan\Scripts\Player.cs" />
+    <Compile Include="Assets\C# Study\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\C# Study\Scripts\Mover.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
   </ItemGroup>
