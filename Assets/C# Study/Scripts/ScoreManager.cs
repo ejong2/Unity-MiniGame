@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public List<int> scores = new List<int>();
+    private static ScoreManager instance;
+    public static ScoreManager GetInstance()
+    {
+        if (instance == null) instance = FindObjectOfType<ScoreManager>();
+        if (instance == null) instance = new GameObject("ScoreManager").AddComponent<ScoreManager>();
+
+        return instance;
+    }
 
     private void Start()
     {
-        int score0 = 45;
-        int score1 = 100;
-        int score2 = 30;
-
-        scores.Add(score0);
-        scores.Add(score1);
-        scores.Add(score2);
-
-        Debug.Log("scores[0] = " + scores[0]);
-        Debug.Log("scores[1] = " + scores[1]);
-        Debug.Log("scores[2] = " + scores[2]);
+        // ScoreManager 중복 방지
+        if (instance != null)
+        {
+            if(instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
+    private int score = 0;
+    public int GetScore() { return score; }
+    public void AddScore(int newScore) { score += newScore; }
 }
