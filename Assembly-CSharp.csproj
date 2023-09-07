@@ -107,6 +107,7 @@
     <Compile Include="Assets\Sokovan\Scripts\Rotator.cs" />
     <Compile Include="Assets\C# Study\Scripts\ScoreSubtractor.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Amazing Bowling\Scripts\ShooterRotator.cs" />
     <Compile Include="Assets\Sokovan\Scripts\Player.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
