@@ -86,6 +86,7 @@
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Amazing Bowling\Scripts\Ball.cs" />
+    <Compile Include="Assets\Amazing Bowling\Scripts\BallShooter.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Sokovan\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
