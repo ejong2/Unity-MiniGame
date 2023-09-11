@@ -8,7 +8,6 @@ public class Prop : MonoBehaviour
     public ParticleSystem explosionParticle;
     public float hp = 10f;
 
-    [System.Obsolete]
     public void TakeDamage(float damage)
     {
         hp -= damage;

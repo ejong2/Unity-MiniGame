@@ -1,59 +1,69 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public LayerMask WhatIsProp;
+    public LayerMask whatIsProp;
+
     public ParticleSystem explosionParticle;
     public AudioSource explosionAudio;
 
     public float maxDamage = 100f;
     public float explosionForce = 1000f;
-    public float explosionRadius = 20f;
     public float lifeTime = 10f;
+    public float explosionRadius = 20f;
 
-    private void Start()
+    void Start()
     {
         Destroy(gameObject, lifeTime);
     }
 
-    [System.Obsolete]
     private void OnTriggerEnter(Collider other)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, WhatIsProp);
-        foreach (Collider collider in colliders)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, whatIsProp);
+
+        for (int i = 0; i < colliders.Length; i++)
         {
-            Rigidbody targetRigidbody = collider.GetComponent<Rigidbody>();
-            if (!targetRigidbody)
+            Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
+            if (targetRigidbody != null)
             {
-                continue;
+                targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
 
-            targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-
-            Prop targetProp = collider.GetComponent<Prop>();
-            float damage = CalculateDamage(collider.transform.position);
-            targetProp.TakeDamage(damage);
+            Prop targetProp = colliders[i].GetComponent<Prop>();
+            if (targetProp != null)
+            {
+                float damage = CalculateDamage(colliders[i].transform.position);
+                targetProp.TakeDamage(damage);
+            }
         }
 
-        explosionParticle.transform.parent = null;
+        ParticleSystem instantiatedParticle = Instantiate(explosionParticle, transform.position, transform.rotation); // ⭐ 추가
+        AudioSource instantiatedAudio = Instantiate(explosionAudio, transform.position, transform.rotation); // ⭐ 추가
 
-        explosionParticle.Play();
-        explosionAudio.Play();
+        if (instantiatedAudio != null && instantiatedAudio.enabled) // ⭐ 추가
+        {
+            instantiatedAudio.Play();
+        }
 
-        Destroy(explosionParticle.gameObject, explosionParticle.duration);
+        Destroy(instantiatedParticle.gameObject, instantiatedParticle.main.duration); // ⭐ 수정
         Destroy(gameObject);
     }
 
     private float CalculateDamage(Vector3 targetPosition)
     {
         Vector3 explosionToTarget = targetPosition - transform.position;
+
         float distance = explosionToTarget.magnitude;
+
         float edgeToCenterDistance = explosionRadius - distance;
+
         float percentage = edgeToCenterDistance / explosionRadius;
+
         float damage = maxDamage * percentage;
-        damage = Mathf.Max(0, damage); 
+
+        damage = Mathf.Max(0, damage);
 
         return damage;
     }

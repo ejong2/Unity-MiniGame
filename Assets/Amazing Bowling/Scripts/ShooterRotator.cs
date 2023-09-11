@@ -1,7 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ShooterRotator : MonoBehaviour
 {
@@ -9,12 +8,14 @@ public class ShooterRotator : MonoBehaviour
     {
         Idle, Vertical, Horizontal, Ready
     }
-    private RotateState state = RotateState.Idle;
 
+    private RotateState state = RotateState.Idle;
     public float verticalRotateSpeed = 360f;
     public float horizontalRotateSpeed = 360f;
 
-    private void Update()
+    public BallShooter ballShooter; // ⭐추가
+
+    void Update()
     {
         switch (state)
         {
@@ -24,6 +25,7 @@ public class ShooterRotator : MonoBehaviour
                     state = RotateState.Horizontal;
                 }
                 break;
+
             case RotateState.Horizontal:
                 if (Input.GetButton("Fire1"))
                 {
@@ -34,6 +36,7 @@ public class ShooterRotator : MonoBehaviour
                     state = RotateState.Vertical;
                 }
                 break;
+
             case RotateState.Vertical:
                 if (Input.GetButton("Fire1"))
                 {
@@ -42,10 +45,19 @@ public class ShooterRotator : MonoBehaviour
                 else if (Input.GetButtonUp("Fire1"))
                 {
                     state = RotateState.Ready;
+                    ballShooter.enabled = true; // ⭐추가
                 }
                 break;
+
             case RotateState.Ready:
                 break;
         }
+    }
+
+    private void OnEnable() // ⭐추가
+    {
+        transform.rotation = Quaternion.identity;
+        state = RotateState.Idle;
+        ballShooter.enabled = false;
     }
 }
